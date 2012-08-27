@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# Proof of concept module to get my feet wet writing a module.
+# Better way to solve the problem is to use the copy module, possibly
+# template up the inittab.
+
 import os
 
 def get_current_runlevel(inittab_file):
