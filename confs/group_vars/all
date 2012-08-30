@@ -1,0 +1,4 @@
+---
+# Global variables I'd like all playbooks to have
+managed_file_dir: /srv/ansible/managed_files
+

@@ -1,0 +1,53 @@
+---
+
+- name: Local Duke addon repos enabled
+  action: >
+        copy src=${managed_file_dir}/common/lad-addons-on.repo
+        dest=/etc/yum.repos.d/lad-addons.repo
+        owner=root group=root mode=0644
+
+- name: Package list for SL6 lab machines
+  action: yum name=$item state=installed
+  with_items:
+    - "@additional-devel"
+    - "@compat-libraries"
+    - "@basic-desktop"
+    - "@desktop-platform"
+    - "@development"
+    - "@eclipse"
+    - "@emacs"
+    - "@fonts"
+    - "@general-desktop"
+    - "@graphics"
+    - "@internet-browser"
+    - "@java-platform"
+    - "@kde-desktop"
+    - "@legacy-x"
+    - "@misc-sl"
+    - "@network-file-system-client"
+    - "@php"
+    - "@perl-runtime"
+    - "@print-client"
+    - "@remote-desktop-clients"
+    - "@ruby-runtime"
+    - "@scientific"
+    - "@x11"
+    - "@office-suite"
+    - pidgin
+    - libXp
+    - matlabR2010b
+    - matlabR2010b-remote
+    - matlabR2010b-toolbox
+    - R
+    - R-core
+    - R-DBI
+    - R-car
+    - R-java
+    - R-lmtest
+    - R-msm
+    - R-multcomp
+    - R-mvtnorm
+    - R-nws
+    - R-qtl
+    - R-systemfit
+    - R-zoo

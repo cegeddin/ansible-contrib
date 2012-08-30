@@ -1,0 +1,20 @@
+---
+# Our systems should know about the entire account base by default.
+# Set up an override that can disalbe it on a per host or per class basis
+
+
+- name: Copy the appropriate access.conf into place.
+  action: copy src=$item dest=/etc/security/access.conf owner=root group=root mode=0644
+  first_available_file:
+    - ${managed_file_dir}/hosts/${ansible_hostname}/access.conf
+    - ${managed_file_dir}/hostgroup/${hostgroup}/access.conf
+    - ${managed_file_dir}/common/access.conf
+
+- name: Check system auth configuration
+  action: command /etc/econ/econ_auth_config_tool.sh status
+  register: sys_auth_configured
+
+- name: If needed, update system auth configuration
+  action: command /etc/econ/econ_auth_config_tool.sh set_config
+  only_if: "'${sys_auth_configured.stdout}' == 'FALSE'"
+

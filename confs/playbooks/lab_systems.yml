@@ -1,0 +1,19 @@
+###########################################
+# Playbook for hosts that are
+# lab machines
+#
+# This should be called from a valid site.yml
+#
+
+---
+- hosts: labsystems
+  user: root
+  handlers:
+    - include: handlers/restart_services.yml
+    - include: handlers/misc_handlers.yml
+
+  tasks:
+    - include: tasks/labsystems/set_to_runlevel_5.yml
+    - include: tasks/labsystems/update_gdm_configuration.yml
+
+    

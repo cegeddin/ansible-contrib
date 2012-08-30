@@ -1,0 +1,22 @@
+- name: $item should be installed
+  action: yum pkg=$item state=installed
+  with_items:
+     - ntp
+     - ntpdate
+  notify:
+     - restart ntpd
+
+- name: Update the ntp configuration file
+  action: copy src=${managed_file_dir}/common/ntp.conf dest=/etc/ntp.conf owner=root group=root mode=0644
+  notify:
+    - restart ntpd
+
+- name: Update the step-tickers file
+  action: copy src=${managed_file_dir}/common/step-tickers dest=/etc/ntp/step-tickers owner=root group=root mode=0644
+  notify:
+    - restart ntpd
+
+- name: ntp should be running
+  action: service name=ntpd state=running enabled=yes
+
+

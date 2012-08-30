@@ -1,0 +1,77 @@
+
+- name: install afs packages
+  action: yum name=$item state=latest
+  with_items:
+    - openafs
+    - openafs-client
+    - kmod-openafs
+    - fuse-libs
+    - openafs-krb5
+
+- name: copy econ cell configuration files
+  action: copy src=${managed_file_dir}/common/$item dest=/usr/vice/etc/$item
+  with_items:
+    - CellServDB
+    - ThisCell
+    - cacheinfo
+
+- name: Set afs to start on boot
+  action: service name=afs state=running enabled=yes pattern=afsd
+
+- name: create the /usr/local/ symlinks into afs
+  action: file src=/afs/econ.duke.edu/@sys/usr/local/$item dest=/usr/local/$item state=link
+  with_items:
+    - absoft
+    - adobe
+    - ampl
+    - backuppc
+    - dbmscopy
+    - dynare
+    - gauss
+    - gsl
+    - intel
+    - knitro
+    - limdep
+    - maple
+    - matlab
+    - matlabR2009a
+    - rats
+    - stata
+    - stata10
+    - stata11
+    - stata11mp
+
+
+- name: create the /home symlinks into afs
+  action: file src=/afs/econ.duke.edu/home/$item dest=/home/$item state=link
+  with_items:
+    - a
+    - b
+    - c
+    - d
+    - e
+    - f
+    - g
+    - h
+    - i
+    - j
+    - k
+    - l
+    - m
+    - n
+    - o
+    - p
+    - q
+    - r
+    - s
+    - t
+    - u
+    - v
+    - w
+    - x
+    - y
+    - z
+    - other
+
+
+

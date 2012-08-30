@@ -1,0 +1,36 @@
+################################################
+################################################
+## 
+##  Head Ansible playbook for Duke Economics
+##
+################################################
+################################################
+#
+
+---
+- hosts: linuxhosts
+  user: root
+  vars_files:
+    - private_vars.yml
+
+  tasks:
+    - include: tasks/update_authorized_keys.yml
+    - include: tasks/update_linux_server_root_password.yml
+    # install_rpm_keys is a hack to fix a broken repository at Duke.
+    # The brokeness is being fixed, so this is a work around, not a
+    # perm solution.
+    - include: tasks/install_rpm_keys.yml
+    - include: tasks/econ_config_files.yml
+    - include: tasks/setup_ntp.yml
+    - include: tasks/krb5_config.yml
+    - include: tasks/config_system_auth.yml
+    - include: tasks/cluster_and_lab_paths.yml
+
+  handlers:
+    - include: handlers/restart_services.yml
+    - include: handlers/misc_handlers.yml
+
+  
+- include: playbooks/lab_systems.yml
+
+

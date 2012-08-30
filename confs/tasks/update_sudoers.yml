@@ -1,0 +1,7 @@
+---
+
+- name: Copy in correct /etc/sudoers
+  action: >
+    copy src=${managed_file_dir}/common/sudoers 
+    dest=/etc/sudoers owner=root group=root
+    mode=0644

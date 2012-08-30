@@ -1,0 +1,10 @@
+-   name: /etc/econ needs to exist
+    action: file dest=/etc/econ state=directory owner=root group=root mode=0700
+
+-   name: copy the koan reinstall script
+    action: copy src=${managed_file_dir}/econscripts/koan-reinstall dest=/etc/econ/koan-reinstall owner=root group=root mode=0755
+
+-   name: copy the authentication configuration script into place
+    action: >
+        copy src=${managed_file_dir}/econscripts/econ_auth_config_tool.sh 
+        dest=/etc/econ/econ_auth_config_tool.sh owner=root group=root mode=0755

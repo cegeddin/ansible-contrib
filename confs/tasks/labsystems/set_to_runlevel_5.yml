@@ -1,0 +1,6 @@
+---
+- name: Set system to start in runlevel 5/X11
+  action: copy src=${managed_file_dir}/hostgroup/${hostgroup}/inittab dest=/etc/inittab
+  notify:
+    - changerunlevel 5
+

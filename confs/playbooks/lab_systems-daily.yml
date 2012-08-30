@@ -1,0 +1,22 @@
+###########################################
+# Playbook for hosts that are
+# lab machines
+#
+# This should be called from a valid site.yml
+#
+
+---
+# Include the normal run
+- include: playbooks/lab_systems.yml
+
+# Now, the daily stuff
+- hosts: labsystems
+  user: root
+  handlers:
+    - include: handlers/restart_services.yml
+    - include: handlers/misc_handlers.yml
+
+  tasks:
+    - include: tasks/labsystems/lab_packagelist.yml
+
+    

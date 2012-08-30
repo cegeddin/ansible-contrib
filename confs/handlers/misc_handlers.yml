@@ -1,0 +1,6 @@
+---
+######################################################
+# Misc Useful Handlers
+#
+- name: changerunlevel 5
+  action: command /sbin/init 5

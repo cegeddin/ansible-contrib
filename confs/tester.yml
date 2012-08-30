@@ -1,0 +1,38 @@
+##########################################################################
+##########################################################################
+## 
+##  Ansible playbook to test individual tasks,
+## handlers, or sub playbooks
+##
+## I'm chunking up configurations into many small files, allowing me to 
+## test small bits individually, as well as easily identify where things
+## are getting done, and change them quickly when needed.
+## 
+## I use this playbook to test a new task before incorporating it into 
+## one of my larger playbooks.
+##
+##########################################################################
+##########################################################################
+#
+
+---
+- user: root
+  hosts: lab-dev-01
+  vars_files:
+    - private_vars.yml
+  handlers:
+    - include: handlers/restart_services.yml
+    - include: handlers/misc_handlers.yml
+
+################################################
+# Below add the components I want to test.
+#
+  tasks:
+    - include: tasks/labsystems/set_to_runlevel_5.yml
+    #- name: Start afs
+      #action: service name=afs state=running pattern=afsd
+  
+
+#- include: playbooks/lab_systems-daily.yml
+
+

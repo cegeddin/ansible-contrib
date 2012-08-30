@@ -1,0 +1,38 @@
+################################################
+################################################
+## 
+##  Head Ansible playbook for Duke Economics
+##  This version is run once a day, and contains
+##  tasks that take longer to run, but can be
+##  run less frequently
+##
+##
+################################################
+################################################
+#
+
+---
+- hosts: linuxhosts
+  user: root
+  vars_files:
+    - private_vars.yml
+
+  tasks:
+    # install_rpm_keys is a hack to fix a broken repository at Duke.
+    # The brokeness is being fixed, so this is a work around, not a
+    # perm solution.
+    - include: tasks/install_rpm_keys.yml
+    - include: tasks/minimal_package_list.yml
+
+  handlers:
+    - include: handlers/restart_services.yml
+    - include: handlers/misc_handlers.yml
+
+# Include configuration for afs clients
+- include: playbooks/configure_afs_clients.yml
+# Daily runs for different host groups
+- include: playbooks/lab_systems-daily.yml
+# Include the hourly site.yml and run it as well
+- include: site.yml  
+
+

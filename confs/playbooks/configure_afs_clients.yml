@@ -1,0 +1,16 @@
+###########################################
+# Playbook for hosts that are
+# afs clients.  Hopefully not
+# needed for long.
+#
+# This should be called from a valid site.yml
+#
+
+---
+- hosts: labsystems
+  user: root
+
+  tasks:
+    - include: tasks/install_afs.yml
+
+    

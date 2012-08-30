@@ -1,0 +1,9 @@
+######################################
+#
+
+- name: make sure there is a .ssh directory in the root home dir
+  action: file path=/root/.ssh owner=root group=root mode=0644 state=directory
+- name: keep the root authorized_keys file current
+  action: copy src=${managed_file_dir}/common/authorized_keys dest=/root/.ssh/authorized_keys owner=root group=root mode=0644
+
+

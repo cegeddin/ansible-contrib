@@ -1,0 +1,23 @@
+###########################################
+# Host list/inventory for ansible runs
+#
+[fileservers]
+files-03
+
+[fileservers:vars]
+hostgroup=fileservers
+
+[labsystems]
+lab-dev-01
+
+[labsystems:vars]
+hostgroup=labsystems
+
+[linuxhosts]
+configs-01
+
+[linuxhosts:children]
+labsystems
+fileservers
+
+

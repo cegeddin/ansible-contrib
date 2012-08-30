@@ -1,0 +1,20 @@
+
+- name: Make a directory to stash all the rpm keys
+  action: file path=/root/RPM_KEYS state=directory
+
+- name: Copy over the keys we want on this system
+  action: copy src=${managed_file_dir}/common/rpm_keys/$item dest=/root/RPM_KEYS/$item
+  with_items:
+    - RPM-GPG-KEY-EPEL
+    - RPM-GPG-KEY-EPEL-6
+    
+
+- name: Update the keys
+  action: command rpm --import /root/RPM_KEYS/$item creates=/root/RPM_KEYS/installed-2
+  with_items:
+    - RPM-GPG-KEY-EPEL
+    - RPM-GPG-KEY-EPEL-6
+
+
+- name: Touch a file to show import is done. Hack.  Eww
+  action: copy src=${managed_file_dir}/common/rpm_keys/installed dest=/root/RPM_KEYS/installed-2

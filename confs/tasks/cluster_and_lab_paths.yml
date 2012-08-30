@@ -1,0 +1,24 @@
+---
+#
+
+- name: Copy interactive login profile script
+  action: >
+    copy src=${managed_file_dir}/common/interactive-profile.sh
+    dest=/etc/profile.d/interactive-profile.sh
+    owner=root group=root mode=0644
+
+- name: Copy /usr/local/bin stuff
+  action: >
+    copy src=${managed_file_dir}/common/$item
+    dest=/usr/local/bin/$item
+    owner=root group=root mode=0755
+  with_items:
+    - extend-token
+    - knitro-matlab.sh
+    - matlab
+    - matsub
+    - matsubjvm
+    - setup-imsl
+    - statampsub
+    - statasub
+

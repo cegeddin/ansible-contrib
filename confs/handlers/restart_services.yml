@@ -1,0 +1,7 @@
+########################################
+# Handlers for restarting services
+#
+
+- name: restart ntpd
+  action: service name=ntpd state=restarted
+

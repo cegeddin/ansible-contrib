@@ -1,0 +1,39 @@
+- name: make sure the econ repo file is in place
+  action: copy src=${managed_file_dir}/common/econ.repo dest=/etc/yum.repos.d/econ.repo owner=root group=root mode=0644
+
+- name: enable duke-epel 
+  action: >
+        copy src=${managed_file_dir}/common/lad-epel-on.repo
+        dest=/etc/yum.repos.d/lad-epel.repo
+        owner=root group=root mode=0644
+
+- name: get rid of package $item
+  action: yum name=$item state=absent
+  with_items:
+    - logwatch
+
+- name: install minimal package item $item
+  action: yum name=$item state=latest
+  with_items:
+    - koan
+    - ntp
+    - samba-common
+    - net-snmp
+    - net-snmp-libs
+    - strace
+    - vim-enhanced
+    - facter
+    - nss_directories
+    - ntp
+    - pam_krb5
+    - git
+    - pam_ldap
+    - nss-pam-ldapd
+    - nscd
+    - openldap-clients
+    - finger
+    #- econ-release
+    #- krbafs
+    #- krbafs-utils
+    #- system-config-network
+    
