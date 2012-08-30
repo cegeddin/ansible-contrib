@@ -28,11 +28,11 @@
     - include: handlers/restart_services.yml
     - include: handlers/misc_handlers.yml
 
+# Include the hourly site.yml and run it as well
+- include: site.yml  
 # Include configuration for afs clients
 - include: playbooks/configure_afs_clients.yml
 # Daily runs for different host groups
 - include: playbooks/lab_systems-daily.yml
-# Include the hourly site.yml and run it as well
-- include: site.yml  
 
 
