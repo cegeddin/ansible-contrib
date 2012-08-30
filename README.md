@@ -9,9 +9,10 @@ of the gdm configuration script to go along with the appropriate
 set of tasks found in 'update_gdm_configuration.yml'
 
 The idea is to call ansible-playbook on:
-    - 'tester.yml' when testing new playbooks and tasks
-    - 'site.yml' around every hour
-    - 'site-daily.yml' once a day. (And also includes 'site.yml'
+    
+    <li>- 'tester.yml' when testing new playbooks and tasks</li>
+    <li>- 'site.yml' around every hour</li>
+    <li>- 'site-daily.yml' once a day. (And also includes 'site.yml'</li>
 
 As the number of tasks grows, frugal and targeted use of 'site.yml'
 will be necessary to not have ansible runs overun each other.  
