@@ -12,7 +12,7 @@ The idea is to call ansible-playbook on:
 
 * 'tester.yml' when testing new playbooks and tasks
 * 'site.yml' around every hour
-* 'site-daily.yml' once a day. (And also includes 'site.yml'
+* 'site-daily.yml' once a day.
 
 As the number of tasks grows, frugal and targeted use of 'site.yml'
 will be necessary to not have ansible runs overun each other.  
