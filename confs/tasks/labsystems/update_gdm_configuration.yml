@@ -11,5 +11,5 @@
 
 - name: If needed, update system auth configuration
   action: command /etc/econ/econ_auth_config_tool.sh set_config
-  only_if: "'${sys_auth_configured.stdout}' == 'FALSE'"
+  only_if: "'${gdm_configured.stdout}' == 'FALSE'"
 
